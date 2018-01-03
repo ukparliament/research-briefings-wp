@@ -1,0 +1,40 @@
+.research-briefings-ingester {
+	display: block;
+}
+
+.research-briefings-column {
+	width: 45%;
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 9%;
+}
+
+.research-briefings-column:last-of-type {
+	margin-right: 0;
+}
+
+.research-briefings-sortable {
+	display: block;
+	border: 1px solid black;
+	padding: 5px;
+	background: #fff;
+}
+
+.research-briefings-sortable h3 {
+	margin: 0;
+}
+
+.research-briefings-sortable li {
+	border: 1px solid green;
+	border-left: 3px solid green;
+	margin: 5px;
+	padding: 5px 5px 5px 7px;
+	background: #fff;
+	cursor: move;
+	border-radius: 0 5px 5px 0;
+	display: inline-block;
+}
+
+.research-briefings-form .hidden {
+	display: none;
+}

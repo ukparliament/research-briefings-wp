@@ -26,7 +26,7 @@ function research_briefings_wp_read_research_briefings() {
 			'topics'     => $briefing['topic']
 		);
 
-		if($briefing['publisher']['prefLabel']['_value'] == 'House of Commons Library') {
+		if($briefing['publisher']['prefLabel']['_value'] == 'House of Commons Library' && $briefing['title'] !== 'Autumn Budget & Finance (No.2) Bill 2017') {
 			$post = array(
 				'post_title'     => wp_strip_all_tags( $briefing['title'] ),
 				'post_content'   => $briefing['description'][0],

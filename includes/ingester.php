@@ -46,9 +46,8 @@ function research_briefings_wp_read_research_briefings() {
 
 function research_briefings_wp_create_research_briefing($post) {
 	// If the post doesn't already exist, create it
-	$prevPost = get_page_by_title(html_entity_decode($post['post_title']), 'OBJECT', 'post');
-	$prevAutmn = get_page_by_title('Autumn Budget & Finance (No.2) Bill 2017', 'OBJECT', 'post');
-	if(is_null($prevPost) && $prevAutmn) {
+	$alreadyCreated = get_page_by_title(html_entity_decode($post['post_title']), 'OBJECT', 'post');
+	if(is_null($alreadyCreated)) {
 		// Get categories to attach to
 		$categories_to_attach = research_briefings_wp_get_categories_to_attach($post);
 
@@ -72,8 +71,9 @@ function research_briefings_wp_create_research_briefing($post) {
 		}
 
 	} else {
-		$post['post_status'] = 'publish';
-		wp_update_post($post);
+		$alreadyCreated['post_status'] = 'publish';
+		$alreadyCreated['post_date'] = $post['post_date'];
+		wp_update_post($alreadyCreated);
 	}
 }
 

@@ -26,7 +26,7 @@ function research_briefings_wp_read_research_briefings() {
 			'topics'     => $briefing['topic']
 		);
 
-		if($briefing['publisher']['prefLabel']['_value'] == 'House of Commons Library') {
+		if($briefing['publisher']['prefLabel']['_value'] == 'House of Commons Library' && $briefing['title'] !== 'Autumn Budget & Finance (No.2) Bill 2017') {
 			$post = array(
 				'post_title'     => wp_strip_all_tags( $briefing['title'] ),
 				'post_content'   => $briefing['description'][0],
@@ -47,8 +47,7 @@ function research_briefings_wp_read_research_briefings() {
 function research_briefings_wp_create_research_briefing($post) {
 	// If the post doesn't already exist, create it
 	$prevPost = get_page_by_title(html_entity_decode($post['post_title']), 'OBJECT', 'post');
-	$prevAutmn = get_page_by_title('Autumn Budget & Finance (No.2) Bill 2017', 'OBJECT', 'post');
-	if(is_null($prevPost) && $prevAutmn) {
+	if(is_null($prevPost)) {
 		// Get categories to attach to
 		$categories_to_attach = research_briefings_wp_get_categories_to_attach($post);
 

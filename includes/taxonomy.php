@@ -2,7 +2,7 @@
 require_once(ABSPATH . 'wp-admin/includes/taxonomy.php');
 
 function research_briefings_wp_get_or_create_category() {
-	$category_name = 'Briefing paper';
+	$category_name = 'Research Briefing';
 	$category = get_term_by('name', $category_name, 'category');
 	if(!$category) {
 		$category_id = wp_create_category($category_name);

@@ -11,7 +11,7 @@ function research_briefings_wp_read_research_briefings() {
 		return false;
 	}
 
-	$research_briefings = file_get_contents('https://lda.data.parliament.uk/researchbriefings.json?_pageSize=500');
+	$research_briefings = file_get_contents('https://lda.data.parliament.uk/researchbriefings.json?_pageSize=20');
 
 	// If file_get_contents fails, stop.
 	if(!$research_briefings) {

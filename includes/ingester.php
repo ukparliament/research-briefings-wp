@@ -26,7 +26,8 @@ function research_briefings_wp_read_research_briefings() {
 			'topics'     => $briefing['topic']
 		);
 
-		if($briefing['publisher']['prefLabel']['_value'] == 'House of Commons Library' && $briefing['title'] !== 'Autumn Budget & Finance (No.2) Bill 2017') {
+		if($briefing['publisher']['prefLabel']['_value'] == 'House of Commons Library') {
+		
 			$post = array(
 				'post_title'     => wp_strip_all_tags( $briefing['title'] ),
 				'post_content'   => $briefing['description'][0],
@@ -39,14 +40,14 @@ function research_briefings_wp_read_research_briefings() {
 
 			research_briefings_wp_create_research_briefing($post);
 		}
-
 	}
 
 }
 
 function research_briefings_wp_create_research_briefing($post) {
 	// If the post doesn't already exist, create it
-	$alreadyCreated = get_page_by_title(html_entity_decode($post['post_title']), 'OBJECT', 'post');
+	$checkTitle = str_replace('&', '&amp;', html_entity_decode($post['post_title']));
+	$alreadyCreated = get_page_by_title($checkTitle, 'ARRAY_A', 'post');
 	if(is_null($alreadyCreated)) {
 		// Get categories to attach to
 		$categories_to_attach = research_briefings_wp_get_categories_to_attach($post);
@@ -71,8 +72,10 @@ function research_briefings_wp_create_research_briefing($post) {
 		}
 
 	} else {
+		
 		$alreadyCreated['post_status'] = 'publish';
 		$alreadyCreated['post_date'] = $post['post_date'];
+		$alreadyCreated['post_content'] = $post['post_content'];
 		wp_update_post($alreadyCreated);
 	}
 }
